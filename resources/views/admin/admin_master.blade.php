@@ -10,6 +10,9 @@
     <meta content="Themesdesign" name="author" />
     <!-- App favicon -->
 
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/style.css') }}" />
     <link rel="shortcut icon" href="{{asset('backend/assets/images/favicon.ico')}}">
 
     <!-- Select 2 -->
@@ -101,6 +104,13 @@
 
 <!-- App js -->
 <script src="{{asset('backend/assets/js/app.js')}}"></script>
+
+
+<script src="{{asset('backend/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('backend/assets/js/popper.js')}}"></script>
+<script src="{{asset('backend/assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('backend/assets/js/main.js')}}"></script>
+
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
