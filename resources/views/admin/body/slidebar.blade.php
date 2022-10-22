@@ -33,8 +33,8 @@
                         <span>Email</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="email-inbox.html">Inbox</a></li>
-                        <li><a href="email-read.html">Read Email</a></li>
+                        <li><a href="email-inbox.html">test 1</a></li>
+                        <li><a href="email-read.html">test 2</a></li>
                     </ul>
                 </li>
 
