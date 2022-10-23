@@ -5,20 +5,22 @@
             <div class="col-12">
                 <div class="card">
                     <div>
-                        <div class="card-body  font-size-12 "  id="head-div" style="pointer-events: all;border:1px solid black; " >
+                        <div class="card-body"  id="head-div" style="pointer-events: all;border:1px solid #9e9e9e; " >
 
                             <div class="row" >
                                     <div class="col-md-2">
-                                        <label  for="order_no" class="height22 col-md-6  form-label ">رقم الفاتورة</label>
-                                        <input wire:keydown.enter="$emit('gotonext','orderno')" type="text" class="height26 form-control "
+                                        <label  for="order_no" class="form-label-me ">رقم الفاتورة</label>
+                                        <input wire:keydown.enter="$emit('gotonext','orderno')" type="text" class=" form-control "
                                                id="order_no" name="order_no" value="{{$wid}}">
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="date" class="height22 col-md-6 form-label">التاريخ</label>
-                                        <input wire:keydown.enter="$emit('gotonext','date')" class="height26 form-control example-date-input" value="{{"$date"}}" name="date" type="date"  id="date" >
+                                        <label for="date" class="form-label-me">التاريخ</label>
+                                        <input wire:keydown.enter="$emit('gotonext','date')"
+                                               class="form-control  " value="{{"$date"}}"
+                                               name="date" type="date"  id="date" >
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="supplier_id" class=" height22 form-label">المورد</label>
+                                        <label for="supplier_id" class="  form-label-me">المورد</label>
                                         <select  wire:model="moh" name="supplier_id" id="supplier_id" class=" form-control form-select select2"
                                                 aria-label="Default select example"  >
                                             <option value="2">مشتريات عامة</option>
@@ -26,14 +28,11 @@
                                                 <option value="{{ $j->jeha_no }}">{{ $j->jeha_name }}</option>
                                             @endforeach
                                         </select>
-
-
-
                                     </div>
 
 
                                     <div class="col-md-3">
-                                        <label for="example-text-input" class="height22 form-label">المخزن </label>
+                                        <label for="example-text-input" class="height22 form-label-me">المخزن </label>
                                         <select  wire:model="store" name="store_id" id="store_id" class="form-control  form-select "
                                                   style=" vertical-align: middle ;font-size: 12px;height: 26px;padding-bottom:0;padding-top: 0;" >
                                             <option value="1">المخزن الرئيسي</option>
@@ -45,8 +44,6 @@
 
 
                                     <div class="col-md-2">
-
-
                                         <i  id="head-btn" style="margin-top: 18px;"
                                             class=" btn btn-outline-success btn-rounded waves-effect waves-light fas fa-save adventuresome"> موافق </i>
                                     </div>
@@ -63,22 +60,22 @@
                           <div class="row font-size-12 ">
                             <div class="card col-md-4 " style="border:1px solid black;">
                                 <div class="form-group col-md-10 mb-2 ">
-                                    <label class="height22"> الصنف  </label>
+                                    <label class="form-label-me" style="position: relative"> الصنف  </label>
                                     <select name="customer_id" id="customer_id" class="form-select select2 ">
                                         <option value="">Select Customer </option>
                                         <option value="0">New Customer </option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 ">
-                                    <div class="md-3 ">
-                                        <label for="example-text-input" class="height22 form-label">الكمية</label>
-                                        <input class="height26 form-control example-date-input" name="quant" type="text" value="1"
+                                    <div class="md-3 " >
+                                        <label for="example-text-input" class="form-label-me " >الكمية</label>
+                                        <input class="form-control example-date-input" name="quant" type="text" value="1"
                                                id="quant"   >
                                     </div>
                                 </div>
                                 <div class="col-md-6 ">
                                     <div class="md-3">
-                                        <label for="example-text-input" class="height22 form-label">السعر</label>
+                                        <label for="example-text-input" class="form-label-me">السعر</label>
                                         <input class="height26 form-control example-date-input" name="price" type="text" value=""
                                                id="price"   >
                                     </div>
@@ -159,11 +156,12 @@
 
 <script type="text/javascript">
 
+
         Livewire.on('gotonext',postid=>  {
-            alert(postid);
+
           if (postid=='orderno') {  $("#date").focus()};
           if (postid=='mohupdate') { alert('here'); $("#store_id").attr("size","3"); };
-          if (postid=='store_id') {  $("#current_stock_qty").focus()};
+          if (postid=='store_id') { alert('here'); $("#head-btn").active=true};
     })
 
 

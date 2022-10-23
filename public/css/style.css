@@ -8209,14 +8209,17 @@ h1, h2, h3, h4, h5,
 #sidebar {
   min-width: 250px;
   max-width: 250px;
-  background: #866ec7;
-  color: #fff;
+  background: #3a3a3a;
+  color: #0a58ca;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
-  position: relative; }
+  position: relative;
+
+   }
   #sidebar .h6 {
-    color: #fff; }
+    color: #0a58ca; }
+
   #sidebar.active {
     margin-left: -250px; }
     #sidebar.active .custom-menu {
@@ -8225,7 +8228,7 @@ h1, h2, h3, h4, h5,
     margin-bottom: 20px;
     font-weight: 700; }
     #sidebar h1 .logo {
-      color: #fff; }
+      color: #0a58ca; }
   #sidebar ul.components {
     padding: 0; }
   #sidebar ul li {
@@ -8237,13 +8240,13 @@ h1, h2, h3, h4, h5,
     #sidebar ul li a {
       padding: 10px 0;
       display: block;
-      color: rgba(255, 255, 255, 0.8);
+      color: #0a58ca;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
       #sidebar ul li a:hover {
-        color: #fff; }
+        color: #0a58ca; }
     #sidebar ul li.active > a {
       background: transparent;
-      color: #fff; }
+      color: #0a58ca; }
   @media (max-width: 991.98px) {
     #sidebar {
       margin-left: -250px; }
@@ -8312,10 +8315,11 @@ a[data-toggle="collapse"] {
   color: rgba(255, 255, 255, 0.5); }
 
 .form-control {
-  height: 40px !important;
+  margin-top: 1px;
+  height: 26px !important;
   background: #fff;
   color: #000;
-  font-size: 13px;
+  font-size: 10px;
   border-radius: 4px;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
@@ -8334,3 +8338,28 @@ a[data-toggle="collapse"] {
   .form-control:-moz-placeholder {
     /* Firefox 18- */
     color: rgba(0, 0, 0, 0.3); }
+
+.form-label-me {
+    font-size: 12px;
+    margin: 0;
+    height: 22px !important;}
+.select2-selection__rendered {
+    line-height: 26px !important;
+}
+.select2-container .select2-selection--single {
+    height: 26px !important;
+}
+.select2-selection__arrow {
+    height: 26px !important;
+}
+
+.heightselect {
+    height: 26px;
+    line-height:26px;
+}
+
+
+select::-moz-focus-inner { /*Remove button padding in FF*/
+    border: 0;
+    padding: 0;
+}
