@@ -10,6 +10,7 @@
     <meta content="Themesdesign" name="author" />
     <!-- App favicon -->
     <link rel="stylesheet" type="text/css" href="{{ url('/css/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/style2.css') }}" />
 
     <link rel="shortcut icon" href="{{asset('backend/assets/images/favicon.ico')}}">
 
@@ -45,7 +46,7 @@
 
 
     @include('admin.body.header')
-
+    <div class=" wrapper d-flex align-items-stretch"  >
     <!-- ========== Left Sidebar Start ========== -->
     @include('admin.body.slidebar')
     <!-- Left Sidebar End -->
@@ -55,14 +56,15 @@
     <!-- ============================================================== -->
     <!-- Start right Content here -->
     <!-- ============================================================== -->
-    <div class="main-content"  dir="rtl">
+    <div  id="content" class="p-4 p-md-3 pt-5"  dir="rtl">
 
         {{ $slot }}
 
         <!-- End Page-content -->
 
-        @include('admin.body.footer')
 
+
+    </div>
     </div>
     <!-- end main content-->
 
@@ -105,6 +107,11 @@
 
 <!-- App js -->
 <script src="{{asset('backend/assets/js/app.js')}}"></script>
+
+<script src="{{asset('backend/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('backend/assets/js/popper.js')}}"></script>
+<script src="{{asset('backend/assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('backend/assets/js/main.js')}}"></script>
 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

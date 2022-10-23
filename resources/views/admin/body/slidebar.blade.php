@@ -2,43 +2,53 @@
     $id = Auth::user()->id;
     $admindata = App\Models\User::find($id);
 @endphp
-<div class="vertical-menu"  >
-<div class="wrapper d-flex align-items-stretch">
+
+
     <nav id="sidebar">
-        <div class="custom-menu">
-            <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                <i class="fa fa-bars"></i>
-                <span class="sr-only">Toggle Menu</span>
-            </button>
-        </div>
+
+
+
         <div class="p-4 pt-5">
-            <h1><a href="index.html" class="logo">Splash</a></h1>
+            <h1><a href="#" class="logo"> </a></h1>
             <ul class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <a href="#OrderBuy" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">مشتريات</a>
+                    <ul class="collapse list-unstyled" id="OrderBuy">
                         <li>
-                            <a href="#">Home 1</a>
+                            <a href="{{route('order_buy')}}">فاتورة مشتريات</a>
                         </li>
                         <li>
-                            <a href="#">Home 2</a>
+                            <a href="{{route('customer.all')}}">استفسار عن فاتورة</a>
                         </li>
                         <li>
-                            <a href="#">Home 3</a>
+                            <a href="#">استفسار عن فواتير</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#OrderSell" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">مبيعات</a>
+                    <ul class="collapse list-unstyled" id="OrderSell">
+                        <li>
+                            <a href="#">فاتورة مبيعات بالتقسيط</a>
+                        </li>
+                        <li>
+                            <a href="#">فاتورة مبيعات نقداً</a>
+                        </li>
+                        <li>
+                            <a href="#">استفسار عن فاتورة مبيعات</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <a href="#RepAksat" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">تقارير عن العقود</a>
+                    <ul class="collapse list-unstyled" id="RepAksat">
                         <li>
-                            <a href="#">Page 1</a>
+
+                            <a href="{{route('pagi-rep_bank',0)}}">تقرير عن مصرف</a>
                         </li>
                         <li>
-                            <a href="#">Page 2</a>
+                            <a href="{{route('rep_banks.sum')}}">تقرير بإجمالي المصارف</a>
                         </li>
                         <li>
                             <a href="#">Page 3</a>
@@ -53,27 +63,14 @@
                 </li>
             </ul>
 
-            <div class="mb-5">
-                <h3 class="h6">Subscribe for newsletter</h3>
-                <form action="#" class="colorlib-subscribe-form">
-                    <div class="form-group d-flex">
-                        <div class="icon"><span class="icon-paper-plane"></span></div>
-                        <input type="text" class="form-control" placeholder="Enter Email Address">
-                    </div>
-                </form>
-            </div>
-
-            <div class="footer">
-                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-            </div>
-
         </div>
     </nav>
 
+
+
     <!-- Page Content  -->
 
-</div>
-</div>
+
+
+
 

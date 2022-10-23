@@ -42,29 +42,23 @@
 <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
 <!-- Begin page -->
-<div id="layout-wrapper">
+<div id="layout-wrapper" >
 
 
-@include('admin.body.header')
-
+    @include('admin.body.header')
+    <div class=" wrapper d-flex align-items-stretch"  >
     <!-- ========== Left Sidebar Start ========== -->
-@include('admin.body.slidebar')
-    <!-- Left Sidebar End -->
-
-
-
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
-    <div class="main-content"  dir="rtl">
+    @include('admin.body.slidebar')
+    <div  id="content" class="p-4 p-md-3 pt-5"  dir="rtl">
 
         @yield('admin')
         <!-- End Page-content -->
 
-        @include('admin.body.footer')
+
 
     </div>
-    <!-- end main content-->
+    </div>
+
 
 </div>
 <!-- END layout-wrapper -->
@@ -153,7 +147,7 @@
 
 
 
-@livewireScreipts
+@livewireScripts
 
 </body>
 
