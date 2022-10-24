@@ -11,12 +11,19 @@ use Livewire\Component;
 
 class OrderBuyAdd extends Component
 {
+    public $order_no;
+    public $order_date;
 
-public $moh;
-public function updatedMoh()
-{
-    $this->emit('gotonext', 'mohupdate');
-}
+    protected $rules = [
+        'order_no' => 'required',
+        'order_date' => 'required',
+    ];
+    public function BtnHeader()
+    {
+        $this->validate();
+        $this->emit('head-btn-click','order_no');
+
+    }
 
     public $suppliergo;
 

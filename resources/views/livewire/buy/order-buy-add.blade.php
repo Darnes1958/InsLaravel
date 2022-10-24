@@ -5,19 +5,21 @@
             <div class="col-12">
                 <div class="card">
                     <div>
-                        <div class="card-body"  id="head-div" style="pointer-events: all;border:1px solid #9e9e9e; " >
+                        <div class="card-body"  id="head-div" name="head-div" style="pointer-events: all;border:1px solid #9e9e9e; " >
 
                             <div class="row" >
                                     <div class="col-md-2">
                                         <label  for="order_no" class="form-label-me ">رقم الفاتورة</label>
-                                        <input wire:keydown.enter="$emit('gotonext','orderno')" type="text" class=" form-control "
+                                        <input wire:model="order_no"  wire:keydown.enter="$emit('gotonext','orderno')" type="text" class=" form-control "
                                                id="order_no" name="order_no" value="{{$wid}}">
+                                        @error('order_no') <span class="error">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-md-2">
                                         <label for="date" class="form-label-me">التاريخ</label>
-                                        <input wire:keydown.enter="$emit('gotonext','date')"
+                                        <input wire:model="order_date" wire:keydown.enter="$emit('gotonext','date')"
                                                class="form-control  " value="{{"$date"}}"
                                                name="date" type="date"  id="date" >
+                                        @error('order_date') <span class="error">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-md-3">
                                         <label for="supplier_id" class="  form-label-me">المورد</label>
@@ -45,7 +47,8 @@
 
                                     <div class="col-md-2">
                                         <i  id="head-btn" style="margin-top: 18px;"
-                                            class=" btn btn-outline-success btn-rounded waves-effect waves-light fas fa-save adventuresome"> موافق </i>
+                                            class=" btn btn-outline-success btn-rounded waves-effect waves-light fas fa-save adventuresome"
+                                            wire:click="BtnHeader"> موافق </i>
                                     </div>
 
                             </div> <!-- // end row  -->
@@ -164,31 +167,31 @@
           if (postid=='store_id') { alert('here'); $("#head-btn").active=true};
     })
 
-
-    $(function () {
-        $(document).on('click', '#head-btn', function (e) {
-            e.preventDefault();
+        Livewire.on('head-btn-click',postid=> {
+                alert('i am here');
             document.getElementById("data-div").style.pointerEvents = "";
-            document.getElementById("head-div").style.pointerEvents = "none";
-            let the_store = document.getElementById("store_id").value;
+            $('#store_id').prop('disabled', 'disabled');
+                let the_store = document.getElementById("store_id").value;
 
-            $.ajax({
-                url:"{{ route('get-items-in-store') }}",
-                type: "GET",
-                data:{store_id:the_store},
-                success:function(data){
+                $.ajax({
+                    url:"{{ route('get-items-in-store') }}",
+                    type: "GET",
+                    data:{store_id:the_store},
+                    success:function(data){
 
-                    var html = '<option value="">Select Category</option>';
-                    $.each(data,function(key,v){
-                        html += '<option value=" '+v.item_no+' "> '+v.storeitems.item_name+'</option>';
-                    });
-                    $('#customer_id').html(html);
-                }
-            })
+                        var html = '<option value="">Select Category</option>';
+                        $.each(data,function(key,v){
+                            html += '<option value=" '+v.item_no+' "> '+v.storeitems.item_name+'</option>';
+                        });
+                        $('#customer_id').html(html);
+                    }
+                })
 
 
-        })
-    });
+
+        });
+
+
 
         $(document).ready(function() {
 
