@@ -2,6 +2,7 @@
 
 namespace App\Models\jeha;
 
+use App\Models\buy\buys;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +25,10 @@ class jeha extends Model
 
         return $this->belongsTo(jeha_type:: class, 'jeha_type', 'type_no');
 
+    }
+    public function jehaorderbuy()
+    {
+        return $this->hasOne(buys::class,'jeha','jeha_no');
     }
 
 }

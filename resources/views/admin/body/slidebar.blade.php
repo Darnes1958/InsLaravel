@@ -15,7 +15,9 @@
                     <a href="#OrderBuy" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">مشتريات</a>
                     <ul class="collapse list-unstyled" id="OrderBuy">
                         <li>
-                            <a href="{{route('order_buy')}}">فاتورة مشتريات</a>
+                           <!-- <a href="{{route('order_buy')}}">فاتورة مشتريات</a> -->
+                            <a href="{{route('order_buy.add')}}">فاتورة مشتريات</a>
+
                         </li>
                         <li>
                             <a href="{{route('customer.all')}}">استفسار عن فاتورة</a>

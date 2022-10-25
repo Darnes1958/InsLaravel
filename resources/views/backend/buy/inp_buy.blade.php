@@ -1,51 +1,39 @@
+@extends('admin.admin_master')
 
+@section('admin')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="page-content" style="padding-top: 60px; padding-bottom: 12px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+             <div class="card" style="margin: 0">
+               @livewire('buy.order-buy-head')
 
-@livewire('buy.order-buy-add')
-
-
-    <script>
-        Livewire.on('orderenter', postId => {
-            alert('A post was added with the id of: ' + postId);
-        })
-    </script>
-
-
-    <script type="text/javascript">
-        window.livewire.on('change-focus-other-field', function () {
-            dd('test');
-            $("#current_stock_qty").focus();
-        });
-
-
-        $(function () {
-            $(document).on('click', '#head-btn', function (e) {
-                e.preventDefault();
-                document.getElementById("data-div").style.pointerEvents = "";
-                document.getElementById("head-div").style.pointerEvents = "none";
-                let the_store = document.getElementById("store_id").value;
-
-                $.ajax({
-                    url:"{{ route('get-items-in-store') }}",
-                    type: "GET",
-                    data:{store_id:the_store},
-                    success:function(data){
-
-                        var html = '<option value="">Select Category</option>';
-                        $.each(data,function(key,v){
-                            html += '<option value=" '+v.item_no+' "> '+v.storeitems.item_name+'</option>';
-                        });
-                        $('#customer_id').html(html);
-                    }
-                })
-
-
-            })
-        });
+                 <div class="card-body "  id="data-div"
+                      style="pointer-events: none;margin : 10px 0 10px 0px;padding: 0">
+                   <form method="post" action="" >
+                    @csrf
+                   <div class="row font-size-12 " style="margin: 0">
+                       @livewire('buy.order-buy-detail')
+                       @livewire('buy.order-buy-table')
+                   </div>
+                   </form>
+                 </div>
+             </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
-    </script>
+    @stack('scripts')
+@endsection
+
+
+
+
+
 
 
 

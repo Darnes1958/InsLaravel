@@ -14,5 +14,9 @@ class buys extends Model
     protected $primaryKey ='order_no';
     public $incrementing = false;
     public $timestamps = false;
+    public function orderbuyjeha()
+    {
+        return $this->belongsTo(jeha::class,'jeha','jeha_no');
+    }
 
 }

@@ -83,9 +83,10 @@
                                                id="price"   >
                                     </div>
                                 </div>
-                            </div> <!-- // end row --> <br>
+                            </div> <!-- // end row -->
+                              <br>
                             <!-- Hide Add Customer Form -->
-                          <div class="card col-md-8">
+                           <div class="card col-md-8">
                              <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;">
                                 <thead>
                                 <tr>
@@ -139,7 +140,7 @@
                                 <button type="submit" class="btn btn-info" id="storeButton"> Invoice Store</button>
 
                             </div>
-                          </div>
+                           </div>
                           </div>
                         </form>
                     </div> <!-- End card-body -->
