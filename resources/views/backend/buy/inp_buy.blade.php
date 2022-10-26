@@ -11,7 +11,7 @@
 
                  <div class="card-body "  id="data-div"
                       style="pointer-events: none;margin : 10px 0 10px 0px;padding: 0">
-                   <form method="post" action="" >
+                   <form wire:submit.prevent="save" method="post" action="" onkeydown="return event.key != 'Enter';">
                     @csrf
                    <div class="row font-size-12 " style="margin: 0">
                        @livewire('buy.order-buy-detail')
@@ -25,9 +25,7 @@
     </div>
 </div>
 
-
-
-    @stack('scripts')
+@stack('scripts')
 @endsection
 
 

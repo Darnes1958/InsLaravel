@@ -138,29 +138,18 @@
                             <br>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-info" id="storeButton"> Invoice Store</button>
-
                             </div>
                            </div>
                           </div>
                         </form>
                     </div> <!-- End card-body -->
-
                 </div>
             </div> <!-- end col -->
         </div>
-
     </div>
-
-
-
 </div>
-
 @push('scripts')
-
-
 <script type="text/javascript">
-
-
         Livewire.on('gotonext',postid=>  {
 
           if (postid=='orderno') {  $("#date").focus()};
@@ -173,13 +162,11 @@
             document.getElementById("data-div").style.pointerEvents = "";
             $('#store_id').prop('disabled', 'disabled');
                 let the_store = document.getElementById("store_id").value;
-
                 $.ajax({
                     url:"{{ route('get-items-in-store') }}",
                     type: "GET",
                     data:{store_id:the_store},
                     success:function(data){
-
                         var html = '<option value="">Select Category</option>';
                         $.each(data,function(key,v){
                             html += '<option value=" '+v.item_no+' "> '+v.storeitems.item_name+'</option>';
@@ -187,13 +174,7 @@
                         $('#customer_id').html(html);
                     }
                 })
-
-
-
         });
-
-
-
         $(document).ready(function() {
 
             $('#select2').select2();

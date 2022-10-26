@@ -13,6 +13,7 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
+
             $('#select2-dropdown').select2();
             $('#select2-dropdown').on('change', function (e) {
             var data = $('#select2-dropdown').select2("val");

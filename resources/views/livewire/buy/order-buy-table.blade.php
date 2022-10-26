@@ -49,7 +49,7 @@
     <!-- End Hide Add Customer Form -->
     <br>
     <div class="form-group">
-        <button type="submit" class="btn btn-info" id="storeButton"> Invoice Store</button>
+        <button class="btn btn-info" id="storeButton">save</button>
 
     </div>
 </div>

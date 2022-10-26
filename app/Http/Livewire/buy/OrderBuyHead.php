@@ -7,6 +7,8 @@ use App\Models\jeha\jeha;
 use App\Models\stores\items;
 use App\Models\stores\stores;
 use App\Models\stores\stores_names;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Livewire\Component;
 
 class OrderBuyHead extends Component
@@ -32,10 +34,12 @@ class OrderBuyHead extends Component
 
     public function updatedJeha()
     {
+        Config::set('database.connections.other.database', Auth::user()->company);
         $this->jeha_name='';
         $this->jeha_type=0;
         if ($this->jeha!=null) {
         $result = jeha::where('jeha_type',2)->where('jeha_no',$this->jeha)->first();
+
         if ($result) {  $this->jeha_name=$result->jeha_name;
                         $this->jeha_type=$result->jeha_type; }}
     }
@@ -58,12 +62,14 @@ class OrderBuyHead extends Component
 
     public function mount()
     {
+        Config::set('database.connections.other.database', Auth::user()->company);
         $this->order_no=buys::max('order_no')+1;
         $this->order_date=date('Y-m-d');
         $this->jeha='2';
         $this->st_no='1';
         $this->jeha_name='مشتريات عامة';
         $this->jeha_type='2';
+
 
     }
 
@@ -86,7 +92,7 @@ class OrderBuyHead extends Component
             'jeha'=>jeha::where('jeha_type',2)->where('available',1)->get(),
             'stores'=>stores::where('raseed','>',0)->get(),
             'stores_names'=>stores_names::all(),
-            'items'=>items::where('raseed','>',0)->get(),
+            'items'=>items::on('other')->where('raseed','>',0)->get(),
            'jeha_name'=>$this->jeha_name,
            // 'date' => date('Y-m-d'),
            // 'wid' => buys::max('order_no')+1,
