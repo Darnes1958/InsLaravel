@@ -2,15 +2,16 @@
     <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;">
         <thead>
         <tr>
-            <th>رقم الصنف</th>
+            <th width="18%">رقم الصنف</th>
             <th>اسم الصنف </th>
-            <th width="7%">الكمية</th>
-            <th width="10%">السعر </th>
+            <th width="10%">الكمية</th>
+            <th width="15%">السعر </th>
             <th width="15%">المجموع</th>
             <th width="7%">Action</th>
         </tr>
         </thead>
         <tbody id="addRow" class="addRow">
+         
         </tbody>
         <tbody>
         <tr>

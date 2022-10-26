@@ -2,19 +2,21 @@
 
 namespace App\Http\Livewire\Buy;
 
-use App\Models\jeha\jeha;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Livewire\Component;
 use App\Models\stores\items;
-use Illuminate\Support\Facades\DB;
+
 
 class OrderBuyDetail extends Component
 {
-    public $item_no;
+    public $item;
     public $item_name;
     public $st_raseed;
     public $raseed;
+    public $quant;
+    public $price;
 
     protected $listeners = [
         'itemchange'
@@ -23,29 +25,37 @@ class OrderBuyDetail extends Component
     public function itemchange($value)
     {
         if(!is_null($value))
-            $this->item_no = $value;
+            $this->item = $value;
 
-        $this->updatedItem_no();
+        $this->updatedItem();
 
         $this->emit('gotonext', 'item_no');
     }
-    public function updatedItem_no()
+    public function updatedItem()
+
     {
+        $this->item_name='';
         Config::set('database.connections.other.database', Auth::user()->company);
-        if ($this->item_no!=null) {
-          $result=DB::connection('other')->table('items')->where('item_no', $this->item_no)->first();
+        if ($this->item!=null) {
+          $result=items::with('iteminstore')->
+           where('item_no', $this->item)->first();
 
+            if ($result) {
+                $this->item_name=$result->item_name;
+                $this->price=$result->price_buy;
+                $this->raseed= $result->raseed;
+                $this->st_raseed=$result->iteminstore->raseed;
 
-
-            if ($result) {  $this->item_name=$result->item_name;}}
+            }}
     }
 
     protected function rules()
     {
+        Config::set('database.connections.other.database', Auth::user()->company);
         return [
-            'item_no' => ['required','integer','gt:0', 'unique:other.items,item_no'],
-            'quant' =>   ['required','integer','qt:0'],
-            'price' =>   ['required','float'  ,'gt:0'],
+            'item' => ['required','integer','gt:0', 'exists:other.items,item_no'],
+            'quant' =>   ['required','integer','gt:0'],
+            'price' =>   ['required','numeric'  ,'gt:0'],
         ];
     }
     protected $messages = [
@@ -55,14 +65,22 @@ class OrderBuyDetail extends Component
 
     ];
 
+    public function ChkItem()
+    {
+        $this->validate();
+
+    }
+
 
     public function mount()
     {
         Config::set('database.connections.other.database', Auth::user()->company);
         $this->raseed=0;
-        $this->st_raseed-0;
-        $this->item_no=0;
+        $this->st_raseed=0;
+        $this->item=0;
         $this->item_name='';
+        $this->quant=1;
+        $this->price=0;
     }
     public function render()
     {

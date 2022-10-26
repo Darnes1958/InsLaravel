@@ -87,7 +87,7 @@ class OrderBuyHead extends Component
 
     public function render()
     {
-
+        Config::set('database.connections.other.database', Auth::user()->company);
         return view('livewire.buy.order-buy-head',[
             'jeha'=>jeha::where('jeha_type',2)->where('available',1)->get(),
             'stores'=>stores::where('raseed','>',0)->get(),

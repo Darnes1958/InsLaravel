@@ -7,32 +7,47 @@
     </div>
     <div class=" col-md-auto " style="padding :10px 15px 0 0;">
     <div class="row" >
-         <div class="col-3" >
-             <label  for="item_no" class="form-label-me ">رقم الصنف</label>
-             <input wire:model="item_no"  wire:keydown.enter="$emit('gotonext','quant')" type="text" class=" form-control "
-                    id="item_no" name="item_no" >
-             @error('item_no') <span class="error">{{ $message }}</span> @enderror
+         <div class="col-4" >
+             <label  for="itemno" class="form-label-me ">رقم الصنف</label>
+             <input wire:model="item"  wire:keydown.enter="$emit('gotonext','quant')" type="text" class=" form-control "
+                    id="itemno" name="itemno" >
+
          </div>
         <div class="col-8">
-            <label  for="item_name" class="form-label-me ">اسم الصنف</label>
-            <input  wire:model="item_name" type="text" class="form-control"   id="item_name" name="item_name" >
+            <textarea wire:model="item_name" name="item_name" rows="2" cols="25"
+                       style="font-size: 12px;height: 52px;color: #0b5ed7;"
+                       readonly id="item_name" placeholder="اسم الصنف"></textarea>
+
+            @error('item') <span class="error">{{ $message }}</span> @enderror
         </div>
 
     </div>
     </div>
-
-    <div class="col-md-6 ">
-        <div class="md-3 " >
-            <label for="example-text-input" class="form-label-me " >الكمية</label>
-            <input class="form-control example-date-input" name="quant" type="text" value="1"
+    <div class="row" >
+      <div class="col-6 ">
+            <label for="quant" class="form-label-me " >الكمية</label>
+            <input wire:model="quant" wire:keydown.enter="$emit('gotonext','price')"
+                   class="form-control " name="quant" type="text" value="1"
                    id="quant"   >
-        </div>
+            @error('quant') <span class="error">{{ $message }}</span> @enderror
+      </div>
+      <div class="col-6 ">
+                <label for="raseed" class="form-label-me" >الرصيد الكلي</label>
+                <input wire:model="raseed" class="form-control " name="raseed" type="text" readonly
+                       id="raseed"   >
+      </div>
     </div>
-    <div class="col-md-6 ">
-        <div class="md-3">
-            <label for="example-text-input" class="form-label-me">السعر</label>
-            <input class="height26 form-control example-date-input" name="price" type="text" value=""
+    <div class="row" >
+       <div class="col-6">
+            <label for="price" class="form-label-me">السعر</label>
+            <input wire:model="price" wire:keydown.enter="ChkItem" class="form-control" name="price" type="text" value=""
                    id="price"   >
+            @error('price') <span class="error">{{ $message }}</span> @enderror
+       </div>
+        <div class="col-6 ">
+            <label for="st_raseed" class="form-label-me " >رصيد المخزن</label>
+            <input wire:model="st_raseed" class="form-control " name="st_raseed" type="text" readonly
+                   id="st_raseed"   >
         </div>
     </div>
 
@@ -42,16 +57,14 @@
     <script type="text/javascript">
         Livewire.on('itemchange',postid=>{
 
-            $("#item_no").focus();
+            $("#itemno").focus();
         });
 
         Livewire.on('gotonext',postid=>  {
 
             if (postid=='quant') {  $("#quant").focus(); };
-            if (postid=='item_no') {  $("#item_no").focus(); };
+            if (postid=='item_no') {  $("#itemno").focus(); };
             if (postid=='price') {  $("#price").focus(); };
-
-
         });
 
 
