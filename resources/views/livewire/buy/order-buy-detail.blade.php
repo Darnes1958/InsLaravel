@@ -51,6 +51,7 @@
         </div>
     </div>
 
+
 </div>
 
 @push('scripts')
@@ -66,7 +67,18 @@
             if (postid=='item_no') {  $("#itemno").focus(); };
             if (postid=='price') {  $("#price").focus(); };
         });
+        Livewire.on('TakeData',postid=>
+         {
+          
+            var formData = {};
+            formData["item_no"] = document.getElementById("itemno").value;
+            formData["item_name"] = document.getElementById("item_name").value;
+            formData["quant"] = document.getElementById("quant").value;
+            formData["price"] = document.getElementById("price").value;
 
+             Livewire.emit('putdata',formData);
+
+        });
 
     </script>
 @endpush

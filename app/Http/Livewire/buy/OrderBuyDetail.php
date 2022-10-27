@@ -68,6 +68,7 @@ class OrderBuyDetail extends Component
     public function ChkItem()
     {
         $this->validate();
+        $this->emit('TakeData');
 
     }
 

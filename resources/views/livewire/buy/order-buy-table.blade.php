@@ -1,5 +1,5 @@
 <div class="card col-md-8">
-    <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;">
+    <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;" id="orderlist">
         <thead>
         <tr>
             <th width="18%">رقم الصنف</th>
@@ -11,7 +11,7 @@
         </tr>
         </thead>
         <tbody id="addRow" class="addRow">
-         
+
         </tbody>
         <tbody>
         <tr>
@@ -53,4 +53,40 @@
         <button class="btn btn-info" id="storeButton">save</button>
 
     </div>
+    <div>
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
 </div>
+@push('scripts')
+    <script type="text/javascript">
+
+
+        Livewire.on('PushData',data=>  {
+alert('PushData');
+            var table = document.getElementById("orderlist").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.length);
+            cell1 = newRow.insertCell(0);
+            cell1.innerHTML = data.item_no;
+            cell2 = newRow.insertCell(1);
+            cell2.innerHTML = data.item_name;
+            cell3 = newRow.insertCell(2);
+            cell3.innerHTML = data.quant;
+            cell4 = newRow.insertCell(3);
+            cell4.innerHTML = data.price;
+            cell5 = newRow.insertCell(4);
+            cell5.innerHTML = data.price;
+
+            cell6 = newRow.insertCell(5);
+            cell6.innerHTML = `<a onClick="onEdit(this)">Edit</a>
+                       <a onClick="onDelete(this)">Delete</a>`;
+        });
+
+
+
+    </script>
+@endpush
+
