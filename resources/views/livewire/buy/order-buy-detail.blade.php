@@ -9,13 +9,13 @@
     <div class="row" >
          <div class="col-4" >
              <label  for="itemno" class="form-label-me ">رقم الصنف</label>
-             <input wire:model="item"  wire:keydown.enter="$emit('gotonext','quant')" type="text" class=" form-control "
-                    id="itemno" name="itemno" >
+             <input wire:model="item"  wire:keydown.enter="$emit('gotonext','quant')"
+                     type="text" class=" form-control "  id="itemno" name="itemno" style="text-align: center">
 
          </div>
         <div class="col-8">
             <textarea wire:model="item_name" name="item_name" rows="2" cols="25"
-                       style="font-size: 12px;height: 52px;color: #0b5ed7;"
+                       style="font-size: 12px;height: 52px;color: #0b5ed7; "
                        readonly id="item_name" placeholder="اسم الصنف"></textarea>
 
             @error('item') <span class="error">{{ $message }}</span> @enderror
@@ -28,7 +28,7 @@
             <label for="quant" class="form-label-me " >الكمية</label>
             <input wire:model="quant" wire:keydown.enter="$emit('gotonext','price')"
                    class="form-control " name="quant" type="text" value="1"
-                   id="quant"   >
+                   id="quant"  style="text-align: center" >
             @error('quant') <span class="error">{{ $message }}</span> @enderror
       </div>
       <div class="col-6 ">
@@ -41,7 +41,7 @@
        <div class="col-6">
             <label for="price" class="form-label-me">السعر</label>
             <input wire:model="price" wire:keydown.enter="ChkItem" class="form-control" name="price" type="text" value=""
-                   id="price"   >
+                   id="price"  style="text-align: center" >
             @error('price') <span class="error">{{ $message }}</span> @enderror
        </div>
         <div class="col-6 ">
@@ -63,22 +63,11 @@
 
         Livewire.on('gotonext',postid=>  {
 
-            if (postid=='quant') {  $("#quant").focus(); };
-            if (postid=='item_no') {  $("#itemno").focus(); };
-            if (postid=='price') {  $("#price").focus(); };
+            if (postid=='quant') {  $("#quant").focus();  $("#quant").select();};
+            if (postid=='item_no') {  $("#itemno").focus(); $("#itemno").select();};
+            if (postid=='price') {  $("#price").focus(); $("#price").select();};
         });
-        Livewire.on('TakeData',postid=>
-         {
-          
-            var formData = {};
-            formData["item_no"] = document.getElementById("itemno").value;
-            formData["item_name"] = document.getElementById("item_name").value;
-            formData["quant"] = document.getElementById("quant").value;
-            formData["price"] = document.getElementById("price").value;
 
-             Livewire.emit('putdata',formData);
-
-        });
 
     </script>
 @endpush

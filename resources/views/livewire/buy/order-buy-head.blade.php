@@ -78,7 +78,8 @@
             document.getElementById("data-div").style.pointerEvents = "";
             $('#store_id').prop('disabled', 'disabled');
             let the_store = document.getElementById("store_id").value;
-
+            $("#itemno").focus();
+            $("#itemno").select();
 
 
         });

@@ -17,11 +17,36 @@ class OrderBuyDetail extends Component
     public $raseed;
     public $quant;
     public $price;
+    public $orderdetail=[];
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
     protected $listeners = [
-        'itemchange'
+        'itemchange','edititem','YesIsFound','ClearData'
     ];
-
+    public function ClearData () {
+        $this->raseed=0;
+        $this->st_raseed=0;
+        $this->item=0;
+        $this->item_name='';
+        $this->quant=1;
+        $this->price=0.00;
+        $this->emit('gotonext', 'item_no');
+}
+    public function YesIsFound($q,$p){
+        $this->quant=$q;
+        $this->price=$p ;
+    }
+    public function edititem($value)
+    {
+        $this->item=$value['item_no'];
+        $this->item_name=$value['item_name'];
+        $this->quant=$value['quant'];
+        $this->price=$value['price'] ;
+        $this->emit('gotonext', 'item_no');
+    }
     public function itemchange($value)
     {
         if(!is_null($value))
@@ -42,9 +67,10 @@ class OrderBuyDetail extends Component
 
             if ($result) {
                 $this->item_name=$result->item_name;
-                $this->price=$result->price_buy;
+                $this->price=number_format($result->price_buy, 2, '.', '')  ;
                 $this->raseed= $result->raseed;
                 $this->st_raseed=$result->iteminstore->raseed;
+                $this->emit('ChkIfDataExist',$this->item);
 
             }}
     }
@@ -68,7 +94,10 @@ class OrderBuyDetail extends Component
     public function ChkItem()
     {
         $this->validate();
-        $this->emit('TakeData');
+        $this->orderdetail=['item_no'=>$this->item,'item_name'=>$this->item_name,
+            'quant'=>$this->quant,'price'=>$this->price,'subtot'=>$this->price];
+        $this->emit('putdata',$this->orderdetail);
+
 
     }
 
@@ -81,7 +110,8 @@ class OrderBuyDetail extends Component
         $this->item=0;
         $this->item_name='';
         $this->quant=1;
-        $this->price=0;
+        $this->price=number_format(0, 2, '.', '');
+
     }
     public function render()
     {

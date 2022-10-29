@@ -2,28 +2,61 @@
     <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;" id="orderlist">
         <thead>
         <tr>
-            <th width="18%">رقم الصنف</th>
+            <th width="15%">رقم الصنف</th>
             <th>اسم الصنف </th>
             <th width="10%">الكمية</th>
             <th width="15%">السعر </th>
-            <th width="15%">المجموع</th>
-            <th width="7%">Action</th>
+            <th width="18%">المجموع</th>
+            <th width="12%"></th>
         </tr>
         </thead>
         <tbody id="addRow" class="addRow">
-
+        @foreach($orderdetail as $key => $item)
+            @php if ($key==0) {
+             continue; }
+            @endphp
+            <tr>
+                <td style="color: #0c63e4; text-align: center"> {{ $item['item_no'] }} </td>
+                <td > {{ $item['item_name'] }} </td>
+                <td> {{ $item['quant'] }} </td>
+                <td> {{ $item['price'] }} </td>
+                <td> <input value="{{ $item['subtot'] }}" type="text"
+                             class="form-control estimated_amount" readonly style="background-color: #ddd;" ></td>
+                <td style="padding-top: 2px;padding-bottom: 2px; ">
+                    <i wire:click.prevent="edititem({{$key}})" class="btn btn-outline-primary btn-sm fa fa-edit editable-input" style="margin-left: 2px;"></i>
+                    <i  wire:click.prevent="removeitem({{$key}})" class="btn btn-outline-danger btn-sm fa fa-times "></i>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
         <tbody>
         <tr>
-            <td colspan="4"> Discount</td>
+            <td colspan="4"> إجمالي الفاتورة</td>
             <td>
-                <input type="text" name="discount_amount" id="discount_amount" class="form-control estimated_amount" placeholder="Discount Amount"  >
+                <input wire:model="tot1" type="text" name="tot1"  id="tot1" class="form-control estimated_amount" readonly style="background-color: #ddd;" >
+            </td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td colspan="4"> خصم (تخفيض)  @error('ksm') <span class="error">{{ $message }}</span> @enderror</td>
+            <td>
+                <input wire:model="ksm" wire:keydown.enter="$emit('gotonext','ksm')" type="text" name="ksm" id="ksm" class="form-control estimated_amount"   >
+
             </td>
         </tr>
         <tr>
-            <td colspan="4"> Grand Total</td>
+            <td colspan="4">المدفـــــــوع  @error('madfooh') <span class="error">{{ $message }}</span> @enderror</td>
             <td>
-                <input type="text" name="estimated_amount" value="0" id="estimated_amount" class="form-control estimated_amount" readonly style="background-color: #ddd;" >
+                <input wire:model="madfooh" wire:keydown.enter="$emit('gotonext','madfooh')" type="text" name="madfooh" id="madfooh" class="form-control estimated_amount"   >
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="4" style="color: #0c63e4;"> إجمالي الفاتورة النهائي</td>
+            <td>
+                <input wire:model="tot" type="text" name="tot"  id="tot" class="form-control estimated_amount"
+                       readonly style="background-color: #ddd; color: #0c63e4;font-weight: bold ;" >
             </td>
             <td></td>
         </tr>
@@ -49,44 +82,27 @@
     </div>
     <!-- End Hide Add Customer Form -->
     <br>
-    <div class="form-group">
-        <button class="btn btn-info" id="storeButton">save</button>
+    <div class="form-group" >
+        <button class="btn btn-info" id="storeButton">تخزين الفاتورة</button>
 
     </div>
-    <div>
-        @if (session()->has('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
-    </div>
+
 </div>
+
 @push('scripts')
     <script type="text/javascript">
 
 
-        Livewire.on('PushData',data=>  {
-alert('PushData');
-            var table = document.getElementById("orderlist").getElementsByTagName('tbody')[0];
-            var newRow = table.insertRow(table.length);
-            cell1 = newRow.insertCell(0);
-            cell1.innerHTML = data.item_no;
-            cell2 = newRow.insertCell(1);
-            cell2.innerHTML = data.item_name;
-            cell3 = newRow.insertCell(2);
-            cell3.innerHTML = data.quant;
-            cell4 = newRow.insertCell(3);
-            cell4.innerHTML = data.price;
-            cell5 = newRow.insertCell(4);
-            cell5.innerHTML = data.price;
+        Livewire.on('gotonext',postid=>  {
 
-            cell6 = newRow.insertCell(5);
-            cell6.innerHTML = `<a onClick="onEdit(this)">Edit</a>
-                       <a onClick="onDelete(this)">Delete</a>`;
+            if (postid=='ksm') {  $("#madfooh").focus();  $("#madfooh").select();};
+            if (postid=='madfooh') {  $("#ksm").focus();  $("#ksm").select();};
+
+
         });
-
 
 
     </script>
 @endpush
+
 
