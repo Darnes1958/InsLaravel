@@ -83,7 +83,7 @@
     <!-- End Hide Add Customer Form -->
     <br>
     <div class="form-group" >
-        <button class="btn btn-info" id="storeButton">تخزين الفاتورة</button>
+        <button wire:click="SaveOrder" class="btn btn-info" id="storeButton">تخزين الفاتورة</button>
 
     </div>
 

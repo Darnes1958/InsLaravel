@@ -73,7 +73,7 @@
             if (postid=='store_id') {  $("#head-btn").active=true};
         })
 
-        Livewire.on('head-btn-click',postid=> {
+        Livewire.on('HeadBtnClick',postid=> {
 
             document.getElementById("data-div").style.pointerEvents = "";
             $('#store_id').prop('disabled', 'disabled');

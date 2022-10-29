@@ -11,11 +11,21 @@ class OrderBuyTable extends Component
    public $tot1;
    public $tot;
    public $orderdetail=[];
+    public $order_no;
+    public $order_date;
+    public $jeha_no;
+    public $st_no;
 
    protected $listeners = [
-        'putdata','gotonext','ChkIfDataExist'
+        'putdata','gotonext','ChkIfDataExist','HeadBtnClick'
     ];
-
+   public function HeadBtnClick($Wor,$wd,$wst,$wjh)
+   {
+        $this->order_no=$Wor;
+        $this->order_date=$wd;
+        $this->jeha_no=$wjh;
+        $this->st_no=$wst;
+   }
    public function ChkIfDataExist($witem_no){
 
      $One= array_column($this->orderdetail, 'item_no');
@@ -97,7 +107,10 @@ class OrderBuyTable extends Component
         $this->tot=number_format(0, 2, '.', '');
 
     }
-
+    public function SaveOrder()
+    {
+        
+    }
     public function render()
     {
         return view('livewire.buy.order-buy-table',$this->orderdetail);

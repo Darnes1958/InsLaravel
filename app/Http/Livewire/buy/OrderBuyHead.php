@@ -76,7 +76,7 @@ class OrderBuyHead extends Component
     public function BtnHeader()
     {
         $this->validate();
-        $this->emit('head-btn-click','order_no');
+        $this->emit('HeadBtnClick','order_no','order_date','jeha','st_no');
     }
 
     public $store;

@@ -59,3 +59,6 @@ Route::controller(OrderBuyController::class)->group(function (){
     route::get('/order_buy/add','OrderBuy')->name('order_buy.add');
 
 });
+
+
+
