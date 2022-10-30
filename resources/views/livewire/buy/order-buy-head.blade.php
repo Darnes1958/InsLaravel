@@ -1,4 +1,7 @@
-<div>
+ <div>
+
+
+  <div x-data x-show="$wire.HeadOpen">
     <div class="card-body"  id="head-div" name="head-div" style="pointer-events: all;border:1px solid #9e9e9e; " >
 
         <div class="row" >
@@ -55,6 +58,33 @@
 
         </div> <!-- // end row  -->
     </div> <!-- End card-body -->
+  </div>
+
+    <div x-data x-show="$wire.OrderDataOpen">
+        <div class="card-body"  id="head-div" name="head-div" style="pointer-events: all;border:1px solid #9e9e9e; " >
+
+            <div class="row" >
+                <div class="col-md-auto">
+                    <label   class="form-label-me ">رقم الفاتورة</label>
+                    <input wire:model="order_no" type="text" class=" form-control "   readonly  >
+                </div>
+                <div class="col-md-auto">
+                    <label  class="form-label-me">التاريخ</label>
+                    <input wire:model="order_date" type="text"  class="form-control  "   readonly >
+               </div>
+                <div class="col-md-3">
+                    <label  class="form-label-me">المورد</label>
+                    <input wire:model="jeha_name"   class="form-control  " type="text"  readonly >
+                </div>
+                <div   class="col-md-3" >
+                    <label  class="form-label-me">المخزن</label>
+                    <input wire:model="st_name"   class="form-control  " type="text"   readonly>
+
+                </div>
+            </div> <!-- // end row  -->
+        </div> <!-- End card-body -->
+    </div>
+
 </div>
 
 @push('scripts')

@@ -66,6 +66,7 @@
 
     <div class="form-row">
         <div class="form-group col-md-12">
+            <label for="ntoes" class="form-label">ملاحظات</label>
             <textarea wire:model="notes" name="description" class="form-control" id="description" placeholder="ملاحظات"></textarea>
         </div>
     </div><br>

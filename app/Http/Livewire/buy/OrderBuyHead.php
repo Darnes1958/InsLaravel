@@ -18,7 +18,11 @@ class OrderBuyHead extends Component
     public $jeha;
     public $jeha_type;
     public $st_no;
+    public $st_name;
     public $jeha_name;
+
+    public $HeadOpen;
+    public $OrderDataOpen;
 
     protected $listeners = [
         'jehachange','mounthead'
@@ -69,11 +73,16 @@ class OrderBuyHead extends Component
         Config::set('database.connections.other.database', Auth::user()->company);
         $this->order_no=buys::max('order_no')+1;
         $this->order_date=date('Y-m-d');
-        $this->jeha='2';
         $this->st_no='1';
+        $this->st_name='المخزن الرئيسي';
+        $this->jeha='2';
         $this->jeha_name='مشتريات عامة';
         $this->jeha_type='2';
 
+
+
+        $this->HeadOpen=True;
+        $this->OrderDataOpen=False;
 
     }
 
@@ -81,6 +90,8 @@ class OrderBuyHead extends Component
     {
         $this->validate();
         $this->emit('HeadBtnClick',$this->order_no,$this->order_date,$this->jeha,$this->st_no);
+        $this->HeadOpen=false;
+        $this->OrderDataOpen=True;
     }
 
     public $store;
