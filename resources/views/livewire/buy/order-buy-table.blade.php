@@ -66,7 +66,7 @@
 
     <div class="form-row">
         <div class="form-group col-md-12">
-            <textarea name="description" class="form-control" id="description" placeholder="ملاحظات"></textarea>
+            <textarea wire:model="notes" name="description" class="form-control" id="description" placeholder="ملاحظات"></textarea>
         </div>
     </div><br>
     <div class="row new_customer" style="display:none">
@@ -81,9 +81,18 @@
         </div>
     </div>
     <!-- End Hide Add Customer Form -->
-    <br>
+
+
     <div class="form-group" >
-        <button wire:click="SaveOrder" class="btn btn-info" id="storeButton">تخزين الفاتورة</button>
+
+        <button wire:click.prevent="store()" class="btn btn-info" id="storeButton">تخزين الفاتورة</button>
+
+            @if (session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+
 
     </div>
 

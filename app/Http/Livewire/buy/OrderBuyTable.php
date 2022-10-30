@@ -2,7 +2,17 @@
 
 namespace App\Http\Livewire\Buy;
 
+use App\Models\buy\buy_tran;
+use App\Models\buy\buys;
+use App\Models\jeha\jeha;
+use App\Models\trans\trans;
+use Illuminate\Console\View\Components\Alert;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+
+
 
 class OrderBuyTable extends Component
 {
@@ -15,16 +25,105 @@ class OrderBuyTable extends Component
     public $order_date;
     public $jeha_no;
     public $st_no;
+    public $notes;
 
    protected $listeners = [
-        'putdata','gotonext','ChkIfDataExist','HeadBtnClick'
+        'putdata','gotonext','ChkIfDataExist','HeadBtnClick','mounttable'
     ];
-   public function HeadBtnClick($Wor,$wd,$wst,$wjh)
+   public function mounttable(){
+       $this->mount();
+   }
+
+   public function store(){
+
+       if (count($this->orderdetail)==1){
+           session()->flash('message', 'لم يتم ادخال اصناف بعد');
+
+       }
+      else {
+          Config::set('database.connections.other.database', Auth::user()->company);
+
+          DB::beginTransaction();
+
+          try {
+              DB::connection('other')->table('buys')->insert([
+                  'order_no' => $this->order_no,
+                  'order_no2' => 0,
+                  'jeha' => $this->jeha_no,
+                  'order_date' => $this->order_date,
+                  'order_date_input' => $this->order_date,
+                  'notes' => $this->notes,
+                  'price_type' => 1,
+                  'tot1' => $this->tot1,
+                  'ksm' => $this->ksm,
+                  'tot' => $this->tot,
+                  'tot_charges' => 0,
+                  'cash' => $this->madfooh,
+                  'not_cash' => $this->tot - $this->madfooh,
+                  'place_no' => $this->st_no,
+                  'tran_no' => 0,
+                  'emp' => Auth::user()->empno,
+                  'available' => 0
+              ]);
+
+              foreach ($this->orderdetail as $item) {
+                  if ($item['item_no'] == 0) {
+                      continue;
+                  }
+
+                  DB::connection('other')->table('buy_tran')->insert([
+                      'order_no' => $this->order_no,
+                      'item_no' => $item['item_no'],
+                      'quant' => $item['quant'],
+                      'price_input' => $item['price'],
+                      'price' => $item['price'],
+                      'emp' => Auth::user()->empno,
+                      'tarjeeh' => 0
+
+                  ]);
+              }
+              if ($this->madfooh != 0) {
+
+                  $tran_no = trans::max('tran_no') + 1;
+                  DB::connection('other')->table('trans')->insert([
+                      'tran_no' => $tran_no,
+                      'jeha' => $this->jeha_no,
+                      'val' => $this->madfooh,
+                      'tran_date' => $this->order_date,
+                      'tran_type' => 1,
+                      'imp_exp' => 2,
+                      'tran_who' => 2,
+                      'chk_no' => 0,
+                      'notes' => 'فاتورة مشتريات ' . $this->order_no,
+                      'kyde' => 0,
+                      'emp' => Auth::user()->empno,
+                      'order_no' => $this->order_no
+
+                  ]);
+              }
+
+              DB::commit();
+
+              $this->emit('mounttable');
+              $this->emit('mountdetail');
+              $this->emit('mounthead');
+
+
+          } catch (\Exception $e) {
+              DB::rollback();
+
+              // something went wrong
+          }
+
+      }
+   }
+   public function HeadBtnClick($Wor,$wd,$wjh,$wst)
    {
         $this->order_no=$Wor;
         $this->order_date=$wd;
         $this->jeha_no=$wjh;
         $this->st_no=$wst;
+
    }
    public function ChkIfDataExist($witem_no){
 
@@ -105,12 +204,10 @@ class OrderBuyTable extends Component
         $this->madfooh=number_format(0, 2, '.', '');
         $this->tot1=number_format(0, 2, '.', '');
         $this->tot=number_format(0, 2, '.', '');
+        $this->notes=' ';
 
     }
-    public function SaveOrder()
-    {
-        
-    }
+
     public function render()
     {
         return view('livewire.buy.order-buy-table',$this->orderdetail);

@@ -24,8 +24,11 @@ class OrderBuyDetail extends Component
         $this->validateOnly($propertyName);
     }
     protected $listeners = [
-        'itemchange','edititem','YesIsFound','ClearData'
+        'itemchange','edititem','YesIsFound','ClearData','mountdetail'
     ];
+    public function mountdetail(){
+        $this->mount();
+    }
     public function ClearData () {
         $this->raseed=0;
         $this->st_raseed=0;

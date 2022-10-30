@@ -5,7 +5,7 @@
             <div class="col-md-auto">
                 <label  for="order_no" class="form-label-me ">رقم الفاتورة</label>
                 <input wire:model="order_no"  wire:keydown.enter="$emit('gotonext','orderno')" type="text" class=" form-control "
-                       id="order_no" name="order_no" style="width: 80px;">
+                       id="order_no" name="order_no" style="width: 80px;" autofocus >
                 @error('order_no') <span class="error">{{ $message }}</span> @enderror
             </div>
             <div class="col-md-auto">
@@ -63,6 +63,12 @@
 
             $("#jehano").focus();
         })
+        Livewire.on('mounthead',postid=>{
+
+            $("#orderno").focus();
+            $("#orderno").select();
+        })
+
 
         Livewire.on('gotonext',postid=>  {
 

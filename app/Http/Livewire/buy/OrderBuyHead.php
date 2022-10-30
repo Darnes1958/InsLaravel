@@ -21,8 +21,11 @@ class OrderBuyHead extends Component
     public $jeha_name;
 
     protected $listeners = [
-        'jehachange'
+        'jehachange','mounthead'
     ];
+    public function mounthead(){
+        $this->mount();
+    }
 //
     public function jehachange($value)
     {
@@ -46,6 +49,7 @@ class OrderBuyHead extends Component
 
     protected function rules()
     {
+        Config::set('database.connections.other.database', Auth::user()->company);
         return [
             'order_no' => ['required','integer','gt:0', 'unique:other.buys,order_no'],
             'order_date' => 'required',
@@ -76,7 +80,7 @@ class OrderBuyHead extends Component
     public function BtnHeader()
     {
         $this->validate();
-        $this->emit('HeadBtnClick','order_no','order_date','jeha','st_no');
+        $this->emit('HeadBtnClick',$this->order_no,$this->order_date,$this->jeha,$this->st_no);
     }
 
     public $store;
@@ -87,6 +91,7 @@ class OrderBuyHead extends Component
 
     public function render()
     {
+
         Config::set('database.connections.other.database', Auth::user()->company);
         return view('livewire.buy.order-buy-head',[
             'jeha'=>jeha::where('jeha_type',2)->where('available',1)->get(),
