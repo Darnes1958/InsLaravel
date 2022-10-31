@@ -78,9 +78,6 @@ class OrderBuyHead extends Component
         $this->jeha='2';
         $this->jeha_name='مشتريات عامة';
         $this->jeha_type='2';
-
-
-
         $this->HeadOpen=True;
         $this->OrderDataOpen=False;
 
@@ -90,6 +87,7 @@ class OrderBuyHead extends Component
     {
         $this->validate();
         $this->emit('HeadBtnClick',$this->order_no,$this->order_date,$this->jeha,$this->st_no);
+        $this->emit('mountdetail');
         $this->HeadOpen=false;
         $this->OrderDataOpen=True;
     }

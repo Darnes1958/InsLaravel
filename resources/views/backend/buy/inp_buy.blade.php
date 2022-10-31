@@ -5,24 +5,21 @@
 <div class="page-content" style="padding-top: 60px; padding-bottom: 12px;">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-             <div class="card" style="margin: 0">
-               @livewire('buy.order-buy-head')
-
-                 <div class="card-body "  id="data-div"
-                      style="pointer-events: none;margin : 10px 0 10px 0px;padding: 0">
-                   <form wire:submit.prevent="save" >
-                    @csrf
-                   <div class="row font-size-12 " style="margin: 0">
+           @csrf
+                    <div  class="col-md-4">
+                       @livewire('buy.order-buy-head')
                        @livewire('buy.order-buy-detail')
+
+                    </div>
+                    <div class="col-md-8">
                        @livewire('buy.order-buy-table')
-                   </div>
-                   </form>
-                 </div>
-             </div>
-            </div>
+                    </div>
+
+
         </div>
+
     </div>
+
 </div>
 
 @stack('scripts')

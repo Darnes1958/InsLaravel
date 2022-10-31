@@ -19,15 +19,30 @@ class OrderBuyDetail extends Component
     public $price;
     public $orderdetail=[];
 
+    public $DetailOpen;
+
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
     }
     protected $listeners = [
-        'itemchange','edititem','YesIsFound','ClearData','mountdetail'
+        'itemchange','edititem','YesIsFound','ClearData','mountdetail','dismountdetail'
     ];
     public function mountdetail(){
-        $this->mount();
+        $this->DetailOpen=true;
+        $this->ClearData();
+        $this->emit('gotonext', 'item_no');
+    }
+    public function dismountdetail(){
+        $this->ClearData();
+        $this->DetailOpen=False;
+    }
+
+    public function mount()
+    {
+        Config::set('database.connections.other.database', Auth::user()->company);
+        $this->ClearData();
+        $this->DetailOpen=false;
     }
     public function ClearData () {
         $this->raseed=0;
@@ -35,8 +50,7 @@ class OrderBuyDetail extends Component
         $this->item=0;
         $this->item_name='';
         $this->quant=1;
-        $this->price=0.00;
-        $this->emit('gotonext', 'item_no');
+        $this->price=number_format(0, 2, '.', '');
 }
     public function YesIsFound($q,$p){
         $this->quant=$q;
@@ -105,17 +119,7 @@ class OrderBuyDetail extends Component
     }
 
 
-    public function mount()
-    {
-        Config::set('database.connections.other.database', Auth::user()->company);
-        $this->raseed=0;
-        $this->st_raseed=0;
-        $this->item=0;
-        $this->item_name='';
-        $this->quant=1;
-        $this->price=number_format(0, 2, '.', '');
 
-    }
     public function render()
     {
         return view('livewire.buy.order-buy-detail');

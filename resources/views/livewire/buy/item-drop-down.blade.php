@@ -1,11 +1,13 @@
 <div  wire:ignore class="col-md-auto" >
 
-    <select  class="form-control" id="item-drop-down" >
+    <br>
+    <select  class="form-control" id="item-drop-down" style="width: 400px" >
         <option value="2">مشتريات عامة</option>
         @foreach($select_name as $key => $item)
             <option value="{{ $item->item_no }}">{{ $item->item_name }}</option>
         @endforeach
     </select>
+    <br><br>
 </div>
 
 @push('scripts')

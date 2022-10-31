@@ -105,7 +105,7 @@ class OrderBuyTable extends Component
               DB::commit();
 
               $this->emit('mounttable');
-              $this->emit('mountdetail');
+              $this->emit('dismountdetail');
               $this->emit('mounthead');
 
 
@@ -180,12 +180,12 @@ class OrderBuyTable extends Component
                 2, '.', '');
             $this->tot = number_format($this->tot1 - $this->ksm,
                 2, '.', '');
-        $this->emit('ClearData');
+        $this->emit('mountdetail');
     }
     public function removeitem($value)    {
             unset($this->orderdetail[$value]);
             array_values($this->orderdetail);
-            $this->emit('ClearData');
+            $this->emit('mountdetail');
     }
     public function edititem($value)
     {

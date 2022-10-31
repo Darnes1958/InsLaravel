@@ -1,5 +1,5 @@
-<div class="card col-md-8">
-    <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;" id="orderlist">
+<div class="card col-md-auto">
+    <table class="table-sm table-bordered " width="100%" style="border-color: #ddd;" id="orderlist" >
         <thead>
         <tr>
             <th width="15%">رقم الصنف</th>
